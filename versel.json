@@ -1,0 +1,10 @@
+{
+    "verison": 1,
+    "name": "verrou",
+    "builds": [
+        { "src": "./routes", "use": "@vercel/node" }
+    ],
+    "routes": [
+        { "src": "/(.*)", "dest": "./routes" }
+    ]
+}
