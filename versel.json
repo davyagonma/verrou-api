@@ -1,10 +1,16 @@
 {
-    "verison": 1,
-    "name": "verrou",
+    "version": 2,
     "builds": [
-        { "src": "./routes", "use": "@vercel/node" }
+      {
+        "src": "src/app.js",
+        "use": "@vercel/node"
+      }
     ],
     "routes": [
-        { "src": "/(.*)", "dest": "./routes" }
+      {
+        "src": "/(.*)",
+        "dest": "/src/app.js"
+      }
     ]
-}
+  }
+  
