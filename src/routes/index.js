@@ -1,6 +1,6 @@
 const express = require("express");
-const { registerItem, searchItems, alertItem, defaulte } = require("../controllers/itemController");
-const { registerUser, loginUser, logoutUser } = require("../controllers/authController");
+const { registerItem, searchItems, alertItem, defaulte } = require("./controllers/itemController");
+const { registerUser, loginUser, logoutUser } = require("./controllers/authController");
 const { verifyToken } = require("../middlewares/authMiddleware");
 const multer = require("multer");
 
