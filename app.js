@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const routes = require("./routes");
+const routes = require("src/routes");
 const cors = require("cors");
 require("dotenv").config();
 
@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api", routes);
+app.use((req, res) => {
+    res.json({message: 'API en ligne ! '});
+});
 
 // Démarrer le serveur
 app.listen(port, () => {
