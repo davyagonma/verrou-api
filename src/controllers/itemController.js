@@ -1,4 +1,4 @@
-const {db, bucket} = require("../config/firebase");
+const {db, bucket} = require("./config/firebase");
 const multer = require("multer");
 //const upload = multer({storage: multer.memoryStorage()});
 const registerItem = async (req, res) => {const {type, 
