@@ -1,4 +1,4 @@
-const { auth, db } = require("../config/firebase");
+const { auth, db } = require("./config/firebase");
 
 const registerUser = async (req, res) => {
   const { nom, prenom, telephone, email, motDePasse } = req.body;
