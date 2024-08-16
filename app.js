@@ -8,8 +8,8 @@ const multer = require("multer");
 const serviceAccount = {
   "type": "service_account",
   "project_id": "trouvemonbien-8cb58",
-  "private_key_id": "0dcc0e6b8a4636c37892472d0b9827e4008b440b",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC1Gjr31P7ACJUF\no1eQcWavo/Sm0HdNPWLQsDvQkfSXjeNFEA/m+sAVPgyUPitte+xly4yn/OphdZez\nCk8iTPw1mVdPfltx3354jMA/00Weu4usMCwwYexyfl+8dAz2g98yKkd1OXB2tphc\n48yF4EueMUiRL110tvM7un8k9IJwQCrdbFMfhA+aexZqp8+PWBBYtjyYjd6cSgvw\nh+F42CwMeKkHEpuLswMvNAJ7yg/bx9vajP0L4FVQ0ejBYt2mLdu4gGIkWa7eatBb\nrY07wRq6xJOVEIDoHO6+CNRkfremm+pw0JH1Rrawp3tHqn0gkoWWi+PT8iz4LDT7\n2AxAq8evAgMBAAECggEAV99FU3EWtqizXgv2ddCASaLdF3+5E1JAuw93xmi7bDnd\nV2pGvQVX5Da6NcfAnJvvhSjxs6TlOKqtE6Nh6DvAeGVR1vFxf1w46lcpBQ8HDdDk\nIYUyO7uX1an529/XVlmAF8Ap8fgP2JoabZ/eYesF5dj14/Q+fV4zwPxpqs206K92\nhViBuDgiYkaXF/KkuxyAAuKRKb5eFECqz8jgkE7Oft8vmbkw4XZtFiwl0wddi3H5\nILxZM1yb1HDZawWLrHnZbjxyfyUzK/BLh/Cz4DSP/jOyZT47Hrd9l44tyatozW3O\nIdR0TpOa2q6vcpECH8PnNR7YTQ8meUD9NnCPDidFoQKBgQD6cpxSiUtzk0pRcq9y\n5da0QJjbSPjwsICRr9RRP8ELoqc2igwZPpMINvDQFG2LiigwnrOvLZ/yMxZVlXh9\nIXpajoFF1bWLa21+ktXRXuv0Pbi0YmB2hOfNnbGDylchN2cVfjcTdpFYS6KcnsjT\nEoU16bzloxZe86zvWyakqJK0UQKBgQC5Hg7kjpMDM2uoBcNNojnKCaa6/+7naUPk\n2s7R3ag1HSvX3rJTz+E4xOfxmGNIZFZMqHaYv7N+HgqNVf8DWVYs0Uvd6Rf/68CZ\nKsKHtjf0D8U9SyPmw6HfvT+ceNDOiDTgKC//leciRUmSf9HnXJ4FOSM4/jNoIFcg\nyvwFeeO7/wKBgQCYvYdK6wLCJOUhUUFhYH0WB4Nx0UpJeEuhDkv9lVVFpFg4ce65\nAqmnS+KH9L1uab7jEBbj0n6GttN7NKJ8Jgu56Mk8bv6+XbE0jZarjyl2FqJsGMdd\n4OaCRxc5GhETZ/eNayFp1FkGMXKl9EzkNZpabAfRQSpmlFQ20i96Inj+UQKBgBo/\nzeLQ6L3Cc9iOgKQohcNFXRQVKH496fewozUVFj351fa1SFokFw6itTUH48QnHime\nlbqRLFWM0vg5ooCKEXMndneQDuwmNNhDPPRbfVGpTtGjLwMQ6Io+Xp/Ebe9rVvwW\nFsBKNE0iwAz6/PuuoWWiNYFmYkm4lEI9JkFsiENnAoGBAPCuffDpQyxPrfrxuvEU\nGz/ghctXFzluK00JOToo56QnBVPCJ1P6yX5LR3Tsj7nJBpUpu6Lr578A6kpT6GKW\nRge340KzkcsQfoDzL7Z0vrfaKncGpMVRcLTlSf5ykfOdyJ1cQIXqM3A75Pxu2wsJ\nwwuodHzwyl8X1ja4dyUgJMkw\n-----END PRIVATE KEY-----\n",
+  "private_key_id": "56fd1a4c3188c7bb8c54c8949f327b60736b38c4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCo7pBc2OQeem2M\nnBvvrEQQjT6snDQSUDfjj7XUn7N4ZwrHOwogWepolOH/7ap10O1SD/Gt+Hw3wxWf\n7d3zQn7z+SHGsaKEYCWyJ5jpUdKWxaTPIQbWU1Xr7tswEa+qZ60ePeqQlySHboDG\nQLanbDfwDZFe8Us/usftTqdSIzaI81JOc0wXQz0b9v+QWw9HBuU+Nn5im5ds7KEG\nFFNVGYjZ7BJ+yz1FmZGmNxCqrvuisOiP9Ujd43E6mgFalN6C7rS/2R/owbfutWLD\n6RT5XNgd65Rg9/angaFqqQuOS5nCCUM8jj0I9rGJy+gG3EPlNJ7HYRtYmFxkGq7j\nRpoaTWt7AgMBAAECggEAJ2nlp6v46T2CMrS3dd9Y0A3MSiR1p7Isn/zHHTEXg+dy\npdIaBjtETBs0cWxHgY552FQc/IyFmtL6yCIMzzU7/nspTLzkIIN4OA0yCXnMKt45\nGhRoDnhKCy5i2F+//v+KbgxfHlYNMUXwaJDvrLc8g9b+jEq61kcjXzQjKLBLiH7v\ne18y85T62wIg9LiKbJjYkyObjcM9kk0i4jYXp+1RJHSBVqwoxiF1UkSOfb2UobyE\nEbpD03j0OSSsbr+8sXdqEDc7syLX7UOEm8KX+bYCBBhTq8Eg2w2G4095NlJZE4e3\nxSWiaBxkwUPcTFG3OtxrPamfOe+gshmmcKUksTTvCQKBgQDeSdVQ5i83N7r/9kPx\n8lrNyLsdz/xkYBWB0aKj3m3KA5UaGGQjJheUdqHSy1cwfYostEWsoThT0QD8UWQC\nM082jOmKaEmxUML+27p1a2ce5hD2lih1/L7B9yiV2vtBlj0shC3LOGxbLXCHqQWu\nXimfOnLMotO7MYOsEr6APaRy6QKBgQDCjTUGo4n3TyBqeKfd+8YZHd2kxnFv0Ops\nPUJmDluQmTgTXFcwc95zKFXmmPtRo9sAsuvD0gokQAlRdT5dRCCm4YEPcGddt7bf\ngviGSP1e+Yy3wiQvFihOzKQJexmj6E/dAug/9b7RlzirF+WCVuOm33cHJuYpnG3/\n8DT4IOREwwKBgQC9la0otVm5t393BTuH5BLMBhKI57W0ijptoTUcm/15WTrWqczm\nKXvc9J0p4qF3SusJG6t9A3e+DLjRej1YnxhFR0N791w6rc3Rfef2c2bc9I2tMf5K\nOwka90iXHtBCbPe5uvYvp+zKiuO54E9nGwpWsovsukbpFd7eaJIvX+Oc2QKBgAP9\nYVkBgZLQzJliYA7tWuKo+iKm7yyb3DLcDsCJCtesTLoY6rDTr3wtF5XjDURfV95r\nzOn3JL4ZkhdZkC3Zd9H0TfFDHNuPKPDsfqxCUu/frkMWeCd/DNSQ3cxT+fKikQC3\nTowBPiiOMVtQ4iQKJCEH9CjxY0b3LkpRYsSz5/qBAoGBAM5VQu4bhFCyxieUUvXk\nfbNERrEwYxLgJueulRpvwOJ13x1P/+ZoLwTxkoWKTiacPRpfW4h0jL2+rT9TwMtb\nLuD0hT5cBG5tIlbwJ8tCgmsZMHTEaNF3nyPi/6lcPiV5MqIpJLgxgolfcK0FM7AQ\noTfSNhFK7itvmAyO/Ul7yYD3\n-----END PRIVATE KEY-----\n",
   "client_email": "firebase-adminsdk-qm0jt@trouvemonbien-8cb58.iam.gserviceaccount.com",
   "client_id": "114707665443529141346",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
@@ -20,10 +20,14 @@ const serviceAccount = {
 };
 
 
+
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  storageBucket: "trouvemonbien-8cb58.appspot.com"
+  storageBucket: "trouvemonbien-8cb58.appspot.com",
+  databaseURL: "https://trouvemonbien-8cb58-default-rtdb.firebaseio.com"
 });
+
+
 
 const { db, bucket } = admin;
 const auth = admin.auth(); // Obtenez l'objet auth
