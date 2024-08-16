@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-const { db, bucket, auth } = require("firebase-admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
+const { bucket } = require("firebase-admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
+const { db, auth } = require("admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
 const multer = require("multer");
 
 
