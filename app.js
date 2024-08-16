@@ -29,8 +29,9 @@ admin.initializeApp({
 
 
 
-const { db, bucket } = admin;
+const { bucket } = admin;
 const auth = admin.auth(); // Obtenez l'objet auth
+const db = admin.firestore();
 
 const app = express();
 const port = process.env.PORT || 3000;
