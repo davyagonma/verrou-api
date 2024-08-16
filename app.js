@@ -2,10 +2,13 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-const { db, bucket, auth } = require("firebase-admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
-// const { db, bucket, auth } = require("admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
+const admin = require("firebase-admin"); // Assurez-vous que firebase-admin est importé correctement
 const multer = require("multer");
 
+admin.initializeApp(); // Initialisez l'app Firebase
+
+const { db, bucket } = admin;
+const auth = admin.auth(); // Obtenez l'objet auth
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,7 +26,7 @@ const verifyToken = async (req, res, next) => {
     if (!token) return res.status(403).send("Token is required");
 
     try {
-        const decodedToken = await auth().verifyIdToken(token);
+        const decodedToken = await auth.verifyIdToken(token);
         req.user = decodedToken;
         next();
     } catch (error) {
@@ -31,10 +34,8 @@ const verifyToken = async (req, res, next) => {
     }
 };
 
-
-// Routes pour l'authentification'
-
-app.post("/api/register", registerUser = async (req, res) => {
+// Routes pour l'authentification
+app.post("/api/register", async (req, res) => {
   const { nom, prenom, telephone, email, motDePasse } = req.body;
   try {
     const userRecord = await auth.createUser({
@@ -57,6 +58,7 @@ app.post("/api/register", registerUser = async (req, res) => {
     res.status(400).send(error.message);
   }
 });
+
 
 app.post("/api/login",  async (req, res) => {
   const { email, motDePasse } = req.body;
