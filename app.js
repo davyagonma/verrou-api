@@ -5,6 +5,7 @@ require("dotenv").config();
 const { db, bucket, auth } = require("firebase-admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
 const multer = require("multer");
 
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -28,6 +29,50 @@ const verifyToken = async (req, res, next) => {
         res.status(401).send("Invalid token");
     }
 };
+
+
+// Routes pour l'authentification'
+
+app.post("/api/register", registerUser = async (req, res) => {
+  const { nom, prenom, telephone, email, motDePasse } = req.body;
+  try {
+    const userRecord = await auth.createUser({
+      email,
+      password: motDePasse,
+      displayName: `${nom} ${prenom}`,
+      phoneNumber: telephone,
+    });
+
+    await db.collection("utilisateurs").doc(userRecord.uid).set({
+      nom,
+      prenom,
+      telephone,
+      email,
+      motDePasse, // Note: store hashed password in a real app
+    });
+
+    res.status(201).send("Utilisateur enregistré avec succès");
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+app.post("/api/login",  async (req, res) => {
+  const { email, motDePasse } = req.body;
+  try {
+    const user = await auth.getUserByEmail(email);
+    const customToken = await auth.createCustomToken(user.uid);
+    res.status(200).json({ token: customToken });
+  } catch (error) {
+    res.status(400).send(error.message);
+  }
+});
+
+app.get("api/logout", async (req, res) => {
+  res.status(200).send("User logged out");
+});
+
+
 
 // Routes pour la gestion des biens
 app.post("/api/items", verifyToken, upload.single("file"), async (req, res) => {
