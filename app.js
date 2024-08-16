@@ -5,7 +5,12 @@ require("dotenv").config();
 const admin = require("firebase-admin"); // Assurez-vous que firebase-admin est importé correctement
 const multer = require("multer");
 
-admin.initializeApp(); // Initialisez l'app Firebase
+const serviceAccount = require("trouvemonbien-8cb58-firebase-adminsdk-qm0jt-0dcc0e6b8a.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: "trouvemonbien-8cb58.appspot.com"
+});
 
 const { db, bucket } = admin;
 const auth = admin.auth(); // Obtenez l'objet auth
