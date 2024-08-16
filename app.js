@@ -2,10 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 require("dotenv").config();
-const { db, bucket } = require("firebase-admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
+const { db, bucket, auth } = require("firebase-admin"); // Utilisation de "firebase-admin" au lieu de "firebase"
 const multer = require("multer");
-
-const { verifyToken } = require("authMiddleware"); // Correction des chemins
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +14,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const upload = multer({ storage: multer.memoryStorage() });
+
+// Middleware de vérification du token
+const verifyToken = async (req, res, next) => {
+    const token = req.headers["authorization"];
+    if (!token) return res.status(403).send("Token is required");
+
+    try {
+        const decodedToken = await auth().verifyIdToken(token);
+        req.user = decodedToken;
+        next();
+    } catch (error) {
+        res.status(401).send("Invalid token");
+    }
+};
 
 // Routes pour la gestion des biens
 app.post("/api/items", verifyToken, upload.single("file"), async (req, res) => {
