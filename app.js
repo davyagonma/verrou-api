@@ -116,12 +116,13 @@ app.post("/api/items", verifyToken, upload.single("file"), async (req, res) => {
         blobStream.on("finish", async () => {
             const photoUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
             await db.collection("biens").add({
-                utilisateur_id: req.user.uid,
+                id_utilisateur: req.user.uid,
                 type,
-                numero_serie: numeroSerie,
+                numero: numeroSerie,
                 caracteristiques,
-                photo: photoUrl,
+                image: photoUrl,
                 details,
+                vole: false
             });
 
             res.status(201).send("Bien enregistré avec succès");
@@ -153,13 +154,23 @@ app.get("/api", (req, res) => {
 });
 
 app.post("/api/items/alert", verifyToken, async (req, res) => {
-    const { itemId } = req.body;
+    const { numero } = req.body;
     try {
-        await db.collection("biens").doc(itemId).update({ status: "retrouvé" });
+        await db.collection("biens").doc(numero).update({ vole: false });
         res.status(200).send("Bien marqué comme retrouvé");
     } catch (error) {
         res.status(500).send(error.message);
     }
+});
+
+app.post("/api/items/marquer", verifyToken, async (req, res) => {
+  const { numero } = req.body;
+  try {
+      await db.collection("biens").doc(numero).update({ vole: true });
+      res.status(200).send("Bien marqué comme volé");
+  } catch (error) {
+      res.status(500).send(error.message);
+  }
 });
 
 // Middleware de gestion des erreurs 404
