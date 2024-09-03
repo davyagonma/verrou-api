@@ -5,6 +5,9 @@ require("dotenv").config();
 const admin = require("firebase-admin"); // Assurez-vous que firebase-admin est importé correctement
 const multer = require("multer");
 
+const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
+const { getStorage } = require('firebase-admin/storage');
+
 const serviceAccount = {
   "type": "service_account",
   "project_id": "trouvemonbien-8cb58",
@@ -31,9 +34,10 @@ admin.initializeApp({
 
 
 
-const { bucket } = admin;
+
 const auth = admin.auth(); // Obtenez l'objet auth
 const db = admin.firestore();
+const bucket = getStorage().bucket();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -104,37 +108,41 @@ app.get("api/logout", async (req, res) => {
 
 // Routes pour la gestion des biens
 app.post("/api/items", verifyToken, upload.single("file"), async (req, res) => {
-    const { type, numeroSerie, caracteristiques, details } = req.body;
-    const { file } = req;
-    if (!file) return res.status(400).send("Photo is required");
+  const { type, numeroSerie, caracteristiques, details } = req.body;
+  const { file } = req;
+  if (!file) return res.status(400).send("Photo is required");
 
-    try {
-        const blob = bucket.file(`photos/${Date.now()}_${file.originalname}`);
-        const blobStream = blob.createWriteStream({
-            metadata: { contentType: file.mimetype },
-        });
+  try {
+      const blob = bucket.file(`photos/${Date.now()}_${file.originalname}`);
+      const blobStream = blob.createWriteStream({
+          metadata: { contentType: file.mimetype },
+      });
 
-        blobStream.on("error", (err) => res.status(500).send(err.message));
+      blobStream.on("error", (err) => res.status(500).send(err.message));
 
-        blobStream.on("finish", async () => {
-            const photoUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
-            await db.collection("biens").add({
-                id_utilisateur: req.user.uid,
-                type,
-                numero: numeroSerie,
-                caracteristiques,
-                image: photoUrl,
-                details,
-                vole: false
-            });
+      blobStream.on("finish", async () => {
+          const photoUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+          await db.collection("biens").add({
+              id_utilisateur: req.user.uid,
+              type,
+              numero: numeroSerie,
+              caracteristiques,
+              image: photoUrl,
+              details,
+              vole: false
+          });
 
-            res.status(201).send("Bien enregistré avec succès");
-        });
+          res.status(201).send("Bien enregistré avec succès");
+      });
 
-        blobStream.end(file.buffer);
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
+      blobStream.end(file.buffer);
+  } catch (error) {
+      res.status(500).send(error.message);
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
 });
 
 app.get("/api/items", async (req, res) => {
