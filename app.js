@@ -5,7 +5,6 @@ require("dotenv").config();
 const admin = require("firebase-admin"); // Assurez-vous que firebase-admin est importé correctement
 const multer = require("multer");
 
-const { getFirestore, Timestamp, FieldValue } = require('firebase-admin/firestore');
 const { getStorage } = require('firebase-admin/storage');
 
 const serviceAccount = {
@@ -141,9 +140,6 @@ app.post("/api/items", verifyToken, upload.single("file"), async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000');
-});
 
 app.get("/api/items", async (req, res) => {
     const { type, caracteristiques } = req.query;
