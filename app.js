@@ -50,8 +50,14 @@ const upload = multer({ storage: multer.memoryStorage() });
 
 // Middleware de vérification du token
 const verifyToken = async (req, res, next) => {
-    const token = req.headers["authorization"];
-    if (!token) return res.status(403).send("Token is required");
+  const authHeader = req.headers["authorization"];
+    
+  // Vérifiez que l'en-tête contient un token
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+      return res.status(403).send("Token is required");
+  }
+
+  const token = authHeader.split(" ")[1]; // Récupérer uniquement le token
 
     try {
         const decodedToken = await auth.verifyIdToken(token);
