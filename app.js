@@ -99,6 +99,10 @@ app.post("/api/login",  async (req, res) => {
   try {
     const user = await auth.getUserByEmail(email);
     const customToken = await auth.createCustomToken(user.uid);
+
+// const token = jwt.sign(payload, 'votre_clé_secrète', { expiresIn: '1d' });
+    
+
     res.status(200).json({ token: customToken });
   } catch (error) {
     res.status(400).send(error.message);
@@ -112,7 +116,7 @@ app.get("api/logout", async (req, res) => {
 
 
 // Routes pour la gestion des biens
-app.post("/api/items", verifyToken, upload.single("file"), async (req, res) => {
+app.post("/api/items", upload.single("file"), async (req, res) => {
   const { type, numeroSerie, caracteristiques, details } = req.body;
   const { file } = req;
   if (!file) return res.status(400).send("Photo is required");
@@ -126,11 +130,12 @@ app.post("/api/items", verifyToken, upload.single("file"), async (req, res) => {
       blobStream.on("error", (err) => res.status(500).send(err.message));
 
       blobStream.on("finish", async () => {
+          // const photoUrl = `https://storage.googleapis.com`;
           const photoUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
           await db.collection("biens").add({
-              id_utilisateur: req.user.uid,
+              //id_utilisateur: req.user.uid,
               type,
-              numero: numeroSerie,
+              //numero,
               caracteristiques,
               image: photoUrl,
               details,
