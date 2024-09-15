@@ -157,7 +157,7 @@ app.post("/api/items", async (req, res) => {
     const photoUrl = 'https://storage.googleapis.com';
     await db.collection("biens").add({
       //id_utilisateur: req.user.uid,
-      type,
+      type: type,
       numero : numero,
       caracteristiques,
       image: photoUrl,
