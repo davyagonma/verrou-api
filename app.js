@@ -144,13 +144,13 @@ app.post("/api/items", async (req, res) => {
           });
 
           res.status(201).send("Bien enregistré avec succès");
-      });
+      // });
 
 //       blobStream.end(file.buffer);
-//   } catch (error) {
-//       res.status(500).send(error.message);
-//   }
-// });
+  } catch (error) {
+      res.status(500).send(error.message);
+  }
+});
 
 
 app.get("/api/items", async (req, res) => {
