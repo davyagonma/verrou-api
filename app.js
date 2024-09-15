@@ -116,23 +116,22 @@ app.get("api/logout", async (req, res) => {
 
 
 // Routes pour la gestion des biens
-app.post("/api/items", async (req, res) => {
-// app.post("/api/items", upload.single("file"), async (req, res) => {
+app.post("/api/items-old", upload.single("image"), async (req, res) => {
   const { type, numeroSerie, caracteristiques, details } = req.body;
-  // const { file } = req;
-  // if (!file) return res.status(400).send("Photo is required");
+  const { file } = req;
+  if (!file) return res.status(400).send("Photo is required");
 
   try {
-      // const blob = bucket.file(`photos/${Date.now()}_${file.originalname}`);
-      // const blobStream = blob.createWriteStream({
-      //     metadata: { contentType: file.mimetype },
-      // });
+      const blob = bucket.file(`photos/${Date.now()}_${file.originalname}`);
+      const blobStream = blob.createWriteStream({
+          metadata: { contentType: file.mimetype },
+      });
 
-      // blobStream.on("error", (err) => res.status(500).send(err.message));
+      blobStream.on("error", (err) => res.status(500).send(err.message));
 
-      // blobStream.on("finish", async () => {
-          const photoUrl = `https://storage.googleapis.com`;
-          // const photoUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
+      blobStream.on("finish", async () => {
+          // const photoUrl = `https://storage.googleapis.com`;
+          const photoUrl = `https://storage.googleapis.com/${bucket.name}/${blob.name}`;
           await db.collection("biens").add({
               //id_utilisateur: req.user.uid,
               type,
@@ -144,13 +143,37 @@ app.post("/api/items", async (req, res) => {
           });
 
           res.status(201).send("Bien enregistré avec succès");
-      // });
+      });
 
-//       blobStream.end(file.buffer);
+      blobStream.end(file.buffer);
   } catch (error) {
       res.status(500).send(error.message);
   }
 });
+
+app.post("/api/items", async (req, res) => {
+  const { type, numero, caracteristiques, details } = req.body;
+  try {
+    const photoUrl = 'https://storage.googleapis.com';
+    await db.collection("biens").add({
+      //id_utilisateur: req.user.uid,
+      type,
+      numero : numero,
+      caracteristiques,
+      image: photoUrl,
+      details,
+      vole: false
+  });      
+
+  res.status(201).send("Bien enregistré avec succès");
+
+  }catch (error) {
+  res.status(500).send(error.message);
+  }  
+
+});
+
+
 
 
 app.get("/api/items", async (req, res) => {
