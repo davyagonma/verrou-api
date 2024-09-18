@@ -158,7 +158,7 @@ app.post("/api/items", async (req, res) => {
     await db.collection("biens").add({
       //id_utilisateur: req.user.uid,
       //type: type,
-      numero : numero,
+      //numero : numero,
       caracteristiques,
       image: photoUrl,
       details,
