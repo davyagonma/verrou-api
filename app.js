@@ -26,7 +26,10 @@ const serviceAccount = {
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   storageBucket: "trouvemonbien-8cb58.appspot.com",
-  databaseURL: "https://trouvemonbien-8cb58-default-rtdb.firebaseio.com"
+  databaseURL: "https://trouvemonbien-8cb58-default-rtdb.firebaseio.com",
+  firestore: {
+    ignoreUndefinedProperties: true,  // Ajoutez cette option
+  }
 });
 
 
@@ -157,9 +160,9 @@ app.post("/api/items", async (req, res) => {
     const photoUrl = 'https://storage.googleapis.com';
     await db.collection("biens").add({
       //id_utilisateur: req.user.uid,
-      //type: type,
-      //numero : numero,
-      caracteristiques,
+      type: type,
+      numero : numero,
+      caracteristiques : caracteristiques,
       image: photoUrl,
       details,
       vole: false
