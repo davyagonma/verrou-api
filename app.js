@@ -26,10 +26,7 @@ const serviceAccount = {
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   storageBucket: "trouvemonbien-8cb58.appspot.com",
-  databaseURL: "https://trouvemonbien-8cb58-default-rtdb.firebaseio.com",
-  firestore: {
-    ignoreUndefinedProperties: true,  // Ajoutez cette option
-  }
+  databaseURL: "https://trouvemonbien-8cb58-default-rtdb.firebaseio.com"
 });
 
 
@@ -39,6 +36,10 @@ admin.initializeApp({
 
 const auth = admin.auth(); // Obtenez l'objet auth
 const db = admin.firestore();
+db.settings({
+    ignoreUndefinedProperties: true,  // Activer l'option ici
+});
+
 const bucket = getStorage().bucket();
 
 const app = express();
@@ -164,7 +165,7 @@ app.post("/api/items", async (req, res) => {
       numero : numero,
       caracteristiques : caracteristiques,
       image: photoUrl,
-      details,
+      details: details,
       vole: false
   });      
 
