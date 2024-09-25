@@ -156,7 +156,7 @@ app.post("/api/items-old", upload.single("image"), async (req, res) => {
 });
 
 app.post("/api/items", async (req, res) => {
-  const { type, numero, caracteristiques, details } = req.body;
+  const { type, numero, caracteristiques, details, images } = req.body;
   try {
     const photoUrl = 'https://storage.googleapis.com';
     await db.collection("biens").add({
@@ -164,12 +164,34 @@ app.post("/api/items", async (req, res) => {
       type: type,
       numero : numero,
       caracteristiques : caracteristiques,
-      image: photoUrl,
+      image: images || photoUrl,
       details: details,
       vole: false
   });      
 
   res.status(201).send("Bien enregistré avec succès");
+
+  }catch (error) {
+  res.status(500).send(error.message);
+  }  
+
+});
+
+app.post("/api/items-vole", async (req, res) => {
+  const { type, numero, caracteristiques, details, images } = req.body;
+  try {
+    const photoUrl = 'https://storage.googleapis.com';
+    await db.collection("biens").add({
+      //id_utilisateur: req.user.uid,
+      type: type,
+      numero : numero,
+      caracteristiques : caracteristiques,
+      image: images || photoUrl,
+      details: details,
+      vole: true
+  });      
+
+  res.status(201).send("Bien signalé avec succès");
 
   }catch (error) {
   res.status(500).send(error.message);
